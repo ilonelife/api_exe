@@ -1,6 +1,7 @@
 import 'package:api_exe/data/pixabay_api.dart';
 import 'package:api_exe/model/pixabay.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class PixabayPage extends StatefulWidget {
   const PixabayPage({Key? key}) : super(key: key);
@@ -31,7 +32,7 @@ class _PixabayPageState extends State<PixabayPage> {
   @override
   void initState() {
     super.initState();
-    _showResult('iphone');
+    _showResult('car');
   }
 
   @override
@@ -43,24 +44,42 @@ class _PixabayPageState extends State<PixabayPage> {
           style: TextStyle(fontSize: 16),
         ),
       ),
-      body: Column(
-        children: [
-          TextField(
-            controller: _textEditingController,
-            decoration: InputDecoration(
-                suffixIcon: IconButton(
-              onPressed: () {
-                _showResult(_textEditingController.text);
-              },
-              icon: Icon(Icons.search),
-            )),
-          ),
-          Expanded(
-              child: GridView.count(
-            crossAxisCount: 2,
-            children: _pixabay.map((e) => Image.network(e.previewURL)).toList(),
-          ))
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: TextField(
+                controller: _textEditingController,
+                decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      _showResult(_textEditingController.text);
+                    },
+                    icon: Icon(Icons.search),
+                  ),
+                  //     border: UnderlineInputBorder(),
+                ),
+              ),
+            ),
+            Expanded(
+              child: StaggeredGrid.count(
+                crossAxisCount: 2,
+                crossAxisSpacing: 2,
+                mainAxisSpacing: 2,
+                children: _pixabay
+                    .map(
+                      (e) => Image.network(
+                        e.previewURL,
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                    .toList(),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
