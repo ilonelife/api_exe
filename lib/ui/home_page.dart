@@ -1,3 +1,5 @@
+import 'package:api_exe/model/location.dart';
+import 'package:api_exe/ui/current_weather_page.dart';
 import 'package:api_exe/ui/pixabay_page.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Location> locations = [
+    Location(
+        city: "Suwon",
+        country: "Korea",
+        lat: "37.27353561794753",
+        lon: "127.03411954945867")
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +93,12 @@ class _HomePageState extends State<HomePage> {
               subtitle: Text('날씨 API'),
               trailing: Icon(Icons.chevron_right_outlined),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CurrentWeatherPage(
+                          locations, context), // WeatherPage(),
+                    ));
               },
             ),
             ListTile(
