@@ -1,6 +1,7 @@
-import 'package:api_exe/data/weather_api.dart';
+import 'package:api_exe/data/one_call_api.dart';
 import 'package:api_exe/model/one_call.dart';
 import 'package:api_exe/model/openweather.dart';
+import 'package:api_exe/util/get_timestamp.dart';
 import 'package:flutter/material.dart';
 
 class WeatherPage extends StatefulWidget {
@@ -12,15 +13,15 @@ class WeatherPage extends StatefulWidget {
 
 class _WeatherPageState extends State<WeatherPage> {
   OpenWeather? _currentWeather;
-  Current? _current;
   OneCall? _oneCall;
+  List<Daily> _daily = [];
+  // Daily? _daily;
 
-  final _api = WeatherApi();
+  final _api = OneCallApi();
 
   Future<void> _showResult() async {
     // OpenWeather weather = await _api.fetchWeather();
-    // Current weather = await _api.fetchWeather();
-    OneCall weather = await _api.fetchWeather();
+    OneCall weather = await _api.fetchOneCall();
 
     setState(() {
       // _currentWeather = weather;
@@ -28,10 +29,16 @@ class _WeatherPageState extends State<WeatherPage> {
     });
   }
 
+  Future<void> _showDaily() async {
+    List<Daily> daily = await _api.fetchDaily();
+    _daily = daily;
+  }
+
   @override
   void initState() {
     super.initState();
     _showResult();
+    _showDaily();
   }
 
   @override
@@ -43,15 +50,14 @@ class _WeatherPageState extends State<WeatherPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(''),
+        title: Text('JSON to DART 방식'),
       ),
       body: Center(
-        child: Column(
+        child: ListView(
           children: [
             Container(
               margin: const EdgeInsets.all(10.0),
               child: Text(
-                // '${_current?.temp} °C',
                 '${_oneCall?.current.temp} °C',
                 textAlign: TextAlign.center,
                 style:
@@ -62,23 +68,36 @@ class _WeatherPageState extends State<WeatherPage> {
               height: 10.0,
             ),
             Text(
-              '${_oneCall?.current.humidity}',
+              '습도 : ${_oneCall?.current.humidity}',
               style: TextStyle(fontSize: 16.0),
             ),
             const SizedBox(
               height: 10.0,
             ),
             Text(
-              '${_currentWeather?.feelsLike} °C',
+              '체감온도 : ${_oneCall?.current.feelsLike} °C',
               style: TextStyle(fontSize: 16.0),
             ),
             const SizedBox(
               height: 10.0,
             ),
             Text(
-              'H : ${_currentWeather?.high} °C L : ${_currentWeather?.low} °C',
+              'description : ${_oneCall?.current.weather[0].description}',
               style: TextStyle(fontSize: 16.0),
             ),
+            const SizedBox(
+              height: 10.0,
+            ),
+            ListView.builder(
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
+                itemCount: _daily.length,
+                itemBuilder: (BuildContext cotext, index) {
+                  return Container(
+                    child: Text(
+                        '${getDateFromTimestamp(_daily[index].dt)} / ${_daily[index].windSpeed} / ${_daily[index].windDeg} / ${_daily[index].weather[0].description}'),
+                  );
+                }),
           ],
         ),
       ),

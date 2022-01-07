@@ -26,7 +26,7 @@ class _CurrentWeatherPageState extends State<CurrentWeatherPage> {
 
   _CurrentWeatherPageState(List<Location> locations, BuildContext context)
       : this.locations = locations,
-        this.location = locations[0],
+        this.location = locations[2],
         this.context = context;
 
   @override

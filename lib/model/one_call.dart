@@ -135,7 +135,7 @@ class Weather {
 
   late final int id;
   late final String main;
-  late final String description;
+  late final dynamic description;
   late final String icon;
 
   factory Weather.fromJson(Map<String, dynamic> json) {
@@ -200,7 +200,7 @@ class Hourly {
   late final num feelsLike;
   late final int pressure;
   late final int humidity;
-  late final double dewPoint;
+  late final num dewPoint;
   late final num uvi;
   late final int clouds;
   late final int visibility;
@@ -208,7 +208,7 @@ class Hourly {
   late final int windDeg;
   late final double windGust;
   late final List<Weather> weather;
-  late final int pop;
+  late final num pop;
 
   factory Hourly.fromJson(Map<String, dynamic> json) {
     return Hourly(

@@ -1,6 +1,6 @@
 import 'package:api_exe/model/location.dart';
-import 'package:api_exe/ui/current_weather_page.dart';
 import 'package:api_exe/ui/pixabay_page.dart';
+import 'package:api_exe/ui/weather_page.dart';
 import 'package:flutter/material.dart';
 
 import 'movie_page.dart';
@@ -18,7 +18,17 @@ class _HomePageState extends State<HomePage> {
         city: "Suwon",
         country: "Korea",
         lat: "37.27353561794753",
-        lon: "127.03411954945867")
+        lon: "127.03411954945867"),
+    Location(
+        city: "Seoul",
+        country: "Korea",
+        lat: "37.52355065829156",
+        lon: "126.92327111272373"),
+    Location(
+        city: "Jeju",
+        country: "Korea",
+        lat: "33.415686463433765",
+        lon: "126.56531423452492"),
   ];
 
   @override
@@ -96,18 +106,18 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CurrentWeatherPage(
-                          locations, context), // WeatherPage(),
+                      builder: (context) =>
+                          WeatherPage(), // CurrentWeatherPage(locations, context),
                     ));
               },
             ),
             ListTile(
               leading: Icon(Icons.local_gas_station_outlined),
               title: const Text(
-                '요소수',
+                '물때표',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
-              subtitle: Text('요소수 재고 공공 API'),
+              subtitle: Text('해양 날씨 공공 API'),
               trailing: Icon(Icons.chevron_right_outlined),
               onTap: () {
                 Navigator.pop(context);
