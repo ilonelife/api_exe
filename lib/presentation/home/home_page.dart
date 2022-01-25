@@ -1,9 +1,9 @@
 import 'package:api_exe/model/location.dart';
-import 'package:api_exe/ui/pixabay_page.dart';
-import 'package:api_exe/ui/weather_page.dart';
+import 'package:api_exe/presentation/openweather/weather_page.dart';
+import 'package:api_exe/presentation/pixabay/pixabay_page.dart';
 import 'package:flutter/material.dart';
 
-import 'movie_page.dart';
+import '../tmdb/movie_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       appBar: AppBar(
-        title: const Text('API통신'),
+        title: const Text('개발 레퍼런스'),
       ),
       body: Center(
         child: Column(

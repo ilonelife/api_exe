@@ -3,7 +3,7 @@ import 'package:api_exe/data/get_forecast.dart';
 import 'package:api_exe/model/forecast.dart';
 import 'package:api_exe/model/location.dart';
 import 'package:api_exe/model/weather.dart';
-import 'package:api_exe/ui/extensions.dart';
+import 'package:api_exe/util/extensions.dart';
 import 'package:api_exe/util/get_timestamp.dart';
 import 'package:api_exe/util/get_weather_icon.dart';
 import 'package:flutter/material.dart';

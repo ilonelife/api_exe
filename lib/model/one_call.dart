@@ -223,7 +223,7 @@ class Hourly {
         visibility: json['visibility'],
         windSpeed: json['wind_speed'],
         windDeg: json['wind_deg'],
-        windGust: json['wind_gust'],
+        windGust: json['wind_gust'] / 1,
         weather:
             List.from(json['weather']).map((e) => Weather.fromJson(e)).toList(),
         pop: json['pop']);

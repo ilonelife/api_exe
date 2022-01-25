@@ -5,10 +5,11 @@ import 'package:http/http.dart' as http;
 
 class PixabayApi {
   Future<List<Pixabay>> fetchPixabay(String query) async {
-    String url = 'https://pixabay.com/api/?'
-        'key=24806095-fea70a37f71c6222b27afd5be&q=$query&image_type=photo&pretty=true';
+    const baseUrl = 'https://pixabay.com/api/';
+    const key = '24806095-fea70a37f71c6222b27afd5be';
 
-    final response = await http.get(Uri.parse(url));
+    final response = await http.get(Uri.parse('$baseUrl?'
+        'key=$key&q=$query&image_type=photo&pretty=true'));
 
     if (response.statusCode == 200) {
       List jsonResult = jsonDecode(response.body)['hits'];
