@@ -1,7 +1,10 @@
+import 'package:api_exe/data/pixabay_api.dart';
 import 'package:api_exe/model/location.dart';
 import 'package:api_exe/presentation/openweather/weather_page.dart';
-import 'package:api_exe/presentation/pixabay/pixabay_page.dart';
+import 'package:api_exe/presentation/pixabay/photo_view_model.dart';
+import 'package:api_exe/presentation/pixabay/pixabay_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../tmdb/movie_page.dart';
 
@@ -73,7 +76,10 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => PixabayPage(),
+                      builder: (context) => ChangeNotifierProvider(
+                        create: (_) => PhotoViewModel(PixabayApi()),
+                        child: PixabayScreen(),
+                      ),
                     ));
               },
             ),
@@ -114,10 +120,22 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               leading: Icon(Icons.local_gas_station_outlined),
               title: const Text(
-                '물때표',
+                '요소수 재고',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
-              subtitle: Text('해양 날씨 공공 API'),
+              subtitle: Text('공공 데이터 오픈 API'),
+              trailing: Icon(Icons.chevron_right_outlined),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.local_gas_station_outlined),
+              title: const Text(
+                'JSONPlaceholder',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+              subtitle: Text('{JSON} Placeholder'),
               trailing: Icon(Icons.chevron_right_outlined),
               onTap: () {
                 Navigator.pop(context);
@@ -133,31 +151,14 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            OutlinedButton(
-              child: Text('Fetch data from the internet'),
-              style: OutlinedButton.styleFrom(
-                  primary: Colors.black87,
-                  backgroundColor: Colors.white,
-                  textStyle:
-                      TextStyle(fontSize: 16, fontStyle: FontStyle.italic)),
-              onPressed: () {},
-            ),
-            OutlinedButton(
-              onPressed: () {},
-              child: Text('Pixabay API'),
-            ),
-            OutlinedButton(
-              onPressed: () {},
-              child: Text('TMDB API'),
-            ),
-            OutlinedButton(
-              onPressed: () {},
-              child: Text('Open Weather API'),
-            ),
-            OutlinedButton(
-              onPressed: () {},
-              child: Text('요소수 재고 API'),
+          children: const [
+            Text(
+              'Flutter 클린 코딩 및\n 유용한 소스 레퍼런스 모음',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.black),
             ),
           ],
         ),

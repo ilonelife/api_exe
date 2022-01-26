@@ -1,10 +1,12 @@
 import 'dart:convert';
 
-import 'package:api_exe/model/pixabay.dart';
+import 'package:api_exe/domain/model/pixabay.dart';
+import 'package:api_exe/domain/repository/photo_api.dart';
 import 'package:http/http.dart' as http;
 
-class PixabayApi {
-  Future<List<Pixabay>> fetchPixabay(String query) async {
+class PixabayApi implements PhotoApi {
+  @override
+  Future<List<Pixabay>> fetchPixabays(String query) async {
     const baseUrl = 'https://pixabay.com/api/';
     const key = '24806095-fea70a37f71c6222b27afd5be';
 

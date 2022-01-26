@@ -1,4 +1,27 @@
 class Pixabay {
+  late final int id;
+  late final String pageURL;
+  late final String type;
+  late final String tags;
+  late final String previewURL;
+  late final int previewWidth;
+  late final int previewHeight;
+  late final String webformatURL;
+  late final int webformatWidth;
+  late final int webformatHeight;
+  late final String largeImageURL;
+  late final int imageWidth;
+  late final int imageHeight;
+  late final int imageSize;
+  late final int views;
+  late final int downloads;
+  late final int collections;
+  late final int likes;
+  late final int comments;
+  late final int userId;
+  late final String user;
+  late final String userImageURL;
+
   Pixabay({
     required this.id,
     required this.pageURL,
@@ -23,29 +46,6 @@ class Pixabay {
     required this.user,
     required this.userImageURL,
   });
-
-  late final int id;
-  late final String pageURL;
-  late final String type;
-  late final String tags;
-  late final String previewURL;
-  late final int previewWidth;
-  late final int previewHeight;
-  late final String webformatURL;
-  late final int webformatWidth;
-  late final int webformatHeight;
-  late final String largeImageURL;
-  late final int imageWidth;
-  late final int imageHeight;
-  late final int imageSize;
-  late final int views;
-  late final int downloads;
-  late final int collections;
-  late final int likes;
-  late final int comments;
-  late final int userId;
-  late final String user;
-  late final String userImageURL;
 
   factory Pixabay.fromJson(Map<String, dynamic> json) {
     return Pixabay(
