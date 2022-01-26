@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Location> locations = [
     Location(
-        city: "Suwon",
+        city: "Suwon ",
         country: "Korea",
         lat: "37.27353561794753",
         lon: "127.03411954945867"),
