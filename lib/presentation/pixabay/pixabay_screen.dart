@@ -36,7 +36,7 @@ class _PixabayScreenState extends State<PixabayScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Pixabay : 이미지 검색',
+          'Pixabay : 이미지 검색-',
           style: TextStyle(fontSize: 16),
         ),
       ),

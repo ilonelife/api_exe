@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                 'pixabay',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
-              subtitle: const Text('사진 검색 API'),
+              subtitle: const Text('픽사베이 사진 검색'),
               trailing: const Icon(Icons.chevron_right_outlined),
               onTap: () {
                 Navigator.push(
