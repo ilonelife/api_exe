@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:api_exe/presentation/pixabay/photo_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +13,7 @@ class PixabayScreen extends StatefulWidget {
 
 class _PixabayScreenState extends State<PixabayScreen> {
   final _textEditingController = TextEditingController();
+  StreamSubscription? _subscription;
 
   Future _showResult(String query) async {
     context.read<PhotoViewModel>().fetchPhoto(query);
@@ -19,6 +22,7 @@ class _PixabayScreenState extends State<PixabayScreen> {
   @override
   void dispose() {
     _textEditingController.dispose();
+    _subscription?.cancel();
     super.dispose();
   }
 
@@ -27,6 +31,14 @@ class _PixabayScreenState extends State<PixabayScreen> {
     super.initState();
     Future.microtask(() {
       _showResult('car');
+
+      final uiViewModel = context.read<PhotoViewModel>();
+      _subscription = uiViewModel.eventStream.listen((event) {
+        event.when(showSnackBar: (message) {
+          final snackBar = SnackBar(content: Text(message));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        });
+      });
     });
   }
 
