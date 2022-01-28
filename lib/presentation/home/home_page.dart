@@ -1,5 +1,6 @@
 import 'package:api_exe/data/data_source/pixabay_api.dart';
 import 'package:api_exe/data/repository/photo_api_repository_impl.dart';
+import 'package:api_exe/domain/use_case/get_photos_use_case.dart';
 import 'package:api_exe/model/location.dart';
 import 'package:api_exe/presentation/openweather/weather_page.dart';
 import 'package:api_exe/presentation/pixabay/photo_view_model.dart';
@@ -79,8 +80,8 @@ class _HomePageState extends State<HomePage> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => ChangeNotifierProvider(
-                        create: (_) => PhotoViewModel(
-                            PhotoApiRepositoryImpl(PixabayApi(http.Client()))),
+                        create: (_) => PhotoViewModel(GetPhotosUseCase(
+                            PhotoApiRepositoryImpl(PixabayApi(http.Client())))),
                         child: PixabayScreen(),
                       ),
                     ));

@@ -45,6 +45,7 @@ class _PixabayScreenState extends State<PixabayScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<PhotoViewModel>();
+    final state = viewModel.state;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -69,7 +70,7 @@ class _PixabayScreenState extends State<PixabayScreen> {
                 ),
               ),
             ),
-            viewModel.isLoading
+            state.isLoading
                 ? const CircularProgressIndicator()
                 : Expanded(
                     child: GridView.count(
@@ -77,7 +78,7 @@ class _PixabayScreenState extends State<PixabayScreen> {
                       mainAxisSpacing: 32,
                       padding: const EdgeInsets.all(16),
                       crossAxisCount: 2,
-                      children: viewModel.pixabays
+                      children: state.pixabays
                           .map((e) => Image.network(e.previewURL))
                           .toList(),
                     ),
