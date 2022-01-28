@@ -69,17 +69,19 @@ class _PixabayScreenState extends State<PixabayScreen> {
                 ),
               ),
             ),
-            Expanded(
-              child: GridView.count(
-                crossAxisSpacing: 32,
-                mainAxisSpacing: 32,
-                padding: const EdgeInsets.all(16),
-                crossAxisCount: 2,
-                children: viewModel.pixabays
-                    .map((e) => Image.network(e.previewURL))
-                    .toList(),
-              ),
-            )
+            viewModel.isLoading
+                ? const CircularProgressIndicator()
+                : Expanded(
+                    child: GridView.count(
+                      crossAxisSpacing: 32,
+                      mainAxisSpacing: 32,
+                      padding: const EdgeInsets.all(16),
+                      crossAxisCount: 2,
+                      children: viewModel.pixabays
+                          .map((e) => Image.network(e.previewURL))
+                          .toList(),
+                    ),
+                  )
           ],
         ),
       ),
