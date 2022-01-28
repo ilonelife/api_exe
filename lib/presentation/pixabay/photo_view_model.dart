@@ -24,7 +24,7 @@ class PhotoViewModel with ChangeNotifier {
     _state = state.copyWith(isLoading: true);
     notifyListeners();
 
-    final Result<List<Pixabay>> result = await getPhotosUseCase.execute(query);
+    final Result<List<Pixabay>> result = await getPhotosUseCase(query);
 
     // 상태가 변하는 타이밍
     result.when(

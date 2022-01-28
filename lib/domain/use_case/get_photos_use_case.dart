@@ -9,7 +9,7 @@ class GetPhotosUseCase {
 
   GetPhotosUseCase(this.repository);
 
-  Future<Result<List<Pixabay>>> execute(String query) async {
+  Future<Result<List<Pixabay>>> call(String query) async {
     final result = await repository.fetch(query);
 
     return result.when(success: (pixabays) {

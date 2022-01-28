@@ -1,13 +1,7 @@
-import 'package:api_exe/data/data_source/pixabay_api.dart';
-import 'package:api_exe/data/repository/photo_api_repository_impl.dart';
-import 'package:api_exe/domain/use_case/get_photos_use_case.dart';
 import 'package:api_exe/model/location.dart';
 import 'package:api_exe/presentation/openweather/weather_page.dart';
-import 'package:api_exe/presentation/pixabay/photo_view_model.dart';
 import 'package:api_exe/presentation/pixabay/pixabay_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
 
 import '../tmdb/movie_page.dart';
 
@@ -77,14 +71,18 @@ class _HomePageState extends State<HomePage> {
               trailing: const Icon(Icons.chevron_right_outlined),
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ChangeNotifierProvider(
-                        create: (_) => PhotoViewModel(GetPhotosUseCase(
-                            PhotoApiRepositoryImpl(PixabayApi(http.Client())))),
-                        child: PixabayScreen(),
-                      ),
-                    ));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PixabayScreen(),
+                  ),
+                );
+                // MaterialPageRoute(
+                //   builder: (context) => ChangeNotifierProvider(
+                //     create: (_) => PhotoViewModel(
+                //         GetPhotosUseCase(PhotoApiRepositoryImpl(PixabayApi(http.Client())))),
+                //     child: const PixabayScreen(),
+                //   ),
+                // ));
               },
             ),
             ListTile(
