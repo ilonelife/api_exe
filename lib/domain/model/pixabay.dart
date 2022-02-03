@@ -1,3 +1,41 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'pixabay.freezed.dart';
+part 'pixabay.g.dart';
+
+@freezed
+class Pixabay with _$Pixabay {
+  factory Pixabay({
+    required int id,
+    required String tags,
+    required String previewURL,
+  }) = _Pixabay;
+
+  factory Pixabay.fromJson(Map<String, dynamic> json) =>
+      _$PixabayFromJson(json);
+}
+
+/*
+@JsonSerializable()
+class Pixabay {
+  final int id;
+  final String tags;
+  final String previewURL;
+
+  const Pixabay({
+    required this.id,
+    required this.tags,
+    required this.previewURL,
+  });
+
+  factory Pixabay.fromJson(Map<String, dynamic> json) =>
+      _$PixabayFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PixabayToJson(this);
+}
+*/
+
+/*
 class Pixabay {
   late final int id;
   late final String pageURL;
@@ -104,3 +142,4 @@ class Pixabay {
     return jsonList.map((e) => Pixabay.fromJson(e)).toList();
   }
 }
+*/

@@ -76,13 +76,6 @@ class _HomePageState extends State<HomePage> {
                     builder: (context) => const PixabayScreen(),
                   ),
                 );
-                // MaterialPageRoute(
-                //   builder: (context) => ChangeNotifierProvider(
-                //     create: (_) => PhotoViewModel(
-                //         GetPhotosUseCase(PhotoApiRepositoryImpl(PixabayApi(http.Client())))),
-                //     child: const PixabayScreen(),
-                //   ),
-                // ));
               },
             ),
             ListTile(
