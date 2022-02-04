@@ -1,18 +1,31 @@
+import 'package:api_exe/data/data_source/result.dart';
+import 'package:api_exe/domain/model/pixabay.dart';
+import 'package:api_exe/domain/repository/photo_api_repository.dart';
+import 'package:api_exe/domain/use_case/get_photos_use_case.dart';
+import 'package:api_exe/presentation/pixabay/photo_view_model.dart';
+import 'package:flutter_test/flutter_test.dart';
+
 void main() {
-//   test('Stream 동작 확인', () async {
-//     final viewModel = PhotoViewModel(FakePhotoApiRepository());
-//
-//     await viewModel.fetchPhoto('apple');
-//   });
-// }
-//
-// class FakePhotoApiRepository extends PhotoApiRepository {
-//   @override
-//   Future<Result<List<Pixabay>>> fetch(String query) async {
-//     Future.delayed(const Duration(milliseconds: 500));
-//
-//     return fakeJson.map((e) => Pixabay.fromJson(e)).toList();
-//   }
+  test('Stream 동작 확인', () async {
+    final viewModel =
+        PhotoViewModel(GetPhotosUseCase(FakePhotoApiRepository()));
+
+    await viewModel.fetchPhoto('iphone');
+
+    final List<Pixabay> result =
+        fakeJson.map((e) => Pixabay.fromJson(e)).toList();
+
+    expect(viewModel.state.pixabays, result);
+  });
+}
+
+class FakePhotoApiRepository extends PhotoApiRepository {
+  @override
+  Future<Result<List<Pixabay>>> fetch(String query) async {
+    Future.delayed(const Duration(milliseconds: 500));
+
+    return Result.success(fakeJson.map((e) => Pixabay.fromJson(e)).toList());
+  }
 }
 
 List<Map<String, dynamic>> fakeJson = [

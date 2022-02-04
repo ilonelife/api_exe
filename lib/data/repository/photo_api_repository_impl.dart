@@ -12,8 +12,10 @@ class PhotoApiRepositoryImpl implements PhotoApiRepository {
   Future<Result<List<Pixabay>>> fetch(String query) async {
     final Result<Iterable> result = await api.fetch(query);
 
-    return result.when(success: (iterable) {
-      return Result.success(iterable.map((e) => Pixabay.fromJson(e)).toList());
+    // 반환된 result의 결과도 성공과 실패로 구분해서 처리하게 됨
+    // 이때 when 함수를 사용함
+    return result.when(success: (hits) {
+      return Result.success(hits.map((e) => Pixabay.fromJson(e)).toList());
     }, error: (message) {
       return Result.error(message);
     });

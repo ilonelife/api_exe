@@ -22,7 +22,7 @@ class PixabayApi {
       );
       Map<String, dynamic> jsonResponse = jsonDecode(response.body);
       Iterable hits = jsonResponse['hits'];
-      return Result.success(hits);
+      return Result.success(hits); // success 타입의 클래스를 만들고(생성자), hits 데이터를 반환한다
     } catch (e) {
       return const Result.error('네트워크 에러');
     }
